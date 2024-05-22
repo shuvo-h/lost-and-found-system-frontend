@@ -34,6 +34,7 @@ const LoginForm = ({setIsRegForm}:TProps) => {
     password: "",
   };
 
+  
     return (
         <LFForm
               onSubmit={handleLogin}
