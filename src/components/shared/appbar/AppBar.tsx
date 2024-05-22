@@ -8,13 +8,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Link from "next/link";
-import * as React from "react";
 import LoginRegModl from "./LoginRegModal";
 import { navItems } from "./navList";
 import MobileMenu from "./MobileMenu";
-
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import NavItem from "./NavItem";
 
 function AppNavBar() {
   
@@ -26,9 +23,6 @@ function AppNavBar() {
           <Link style={{ textDecoration: "none" }} href={"/"}>
             <Image src={logo} width={70} height={30} alt="" />
           </Link>
-
-          
-          
           <MobileMenu />
           <Box
             sx={{
@@ -38,9 +32,7 @@ function AppNavBar() {
             }}
           >
             {navItems.map((page) => (
-              <Button href={page.path} component={Link} key={page.name}>
-                {page.name}
-              </Button>
+              <NavItem path={page.path} name={page.name} key={page.path} />
             ))}
           </Box>
 
