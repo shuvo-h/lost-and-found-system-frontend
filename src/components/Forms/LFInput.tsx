@@ -27,21 +27,26 @@ const LFInput = ({
         <Controller
             control={control}
             name={name}
-            render={({ field, fieldState: { error } }) => (
-                <TextField
-                    {...field}
-                    sx={{ ...sx }}
-                    label={label}
-                    type={type}
-                    variant="outlined"
-                    size={size}
-                    fullWidth={fullWidth}
-                    placeholder={label}
-                    required={required}
-                    error={!!error?.message}
-                    helperText={error?.message}
-                />
-            )}
+            render={({ field, fieldState: { error } }) => {
+                // console.log(error);
+                
+                return (
+                    <TextField
+                        {...field}
+                        // value={field.value ?? ''} // Ensure value is never null
+                        sx={{ ...sx }}
+                        label={label}
+                        type={type}
+                        variant="outlined"
+                        size={size}
+                        fullWidth={fullWidth}
+                        placeholder={label}
+                        required={required}
+                        error={!!error?.message}
+                        helperText={error?.message}
+                    />
+                )
+            }}
         />
     );
 };

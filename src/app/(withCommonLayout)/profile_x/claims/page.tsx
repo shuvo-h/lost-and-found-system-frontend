@@ -22,7 +22,7 @@ const ClaimPage = () => {
     { skip: isLoading }
   );
 
-  const [openModal,setOpenModal] = useState(true);
+  const [openModal,setOpenModal] = useState(false);
 
   return (
     <Box>
