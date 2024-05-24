@@ -34,7 +34,7 @@ const LFDatePicker = ({
             <DesktopDatePicker
               label={label}
               timezone="system"
-              disablePast
+              // disablePast
               {...field}
               onChange={(date:any) => onChange(date)}
               value={value || Date.now()}

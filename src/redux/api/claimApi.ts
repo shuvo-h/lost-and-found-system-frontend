@@ -15,8 +15,18 @@ export const claimAPi = baseApi.injectEndpoints({
          },
          providesTags: [tagTypes.claim],
       }),
+      createClaimItem: build.mutation({
+         query: (data) => ({
+            url: '/claims',
+            method: 'POST',
+            // contentType: 'multipart/form-data',
+            data,
+         }),
+         invalidatesTags: [tagTypes.claim],
+      }),
+
 
    }),
 });
 
-export const { useGetClaimItemsQuery, } = claimAPi;
+export const { useGetClaimItemsQuery, useCreateClaimItemMutation} = claimAPi;

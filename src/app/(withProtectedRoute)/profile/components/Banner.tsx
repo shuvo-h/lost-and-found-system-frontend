@@ -7,7 +7,7 @@ import React from 'react';
 
 const Banner = () => {
     const { data, isLoading } = useGetMYProfileQuery(undefined);
-    console.log(data);
+    
     
     if (isLoading) {
         return <></>

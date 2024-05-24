@@ -4,7 +4,7 @@ import LFInput from "@/components/Forms/LFInput";
 import LFSelectDropdown from "@/components/Forms/LFSelectDropdown";
 import LFModal from "@/components/LFModal/LFModal";
 import { useGetCategoryQuery } from "@/redux/api/categoryApi";
-import { useCreateFoundItemMutation } from "@/redux/api/foundItemApi";
+import { useCreateFoundItemMutation, useUpdateFoundItemByIdMutation } from "@/redux/api/foundItemApi";
 import { uploadImageToImgBB } from "@/utils/uploadImgToIMGBB";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
@@ -15,32 +15,36 @@ import { z } from "zod";
 import CircularProgress from '@mui/material/CircularProgress';
 import LFDatePicker from "@/components/Forms/LFDatePicker";
 import dayjs from "dayjs";
+import { TfoundItemPartial } from "./fouondTypes";
+import { ITEM_STATUSES } from "@/constant/status";
 
 const addFoundItemValidationSchema = z.object({
-  categoryId: z.string().min(1,"Category is required"),
-  foundItemName: z.string().min(1,"Item name is required"),
-  description: z.string().min(1,"Description is required"),
-  location: z.string().min(1,"Location is required"),
+  categoryId: z.string().min(1,"Category is required").optional(),
+  foundItemName: z.string().min(1,"Item name is required").optional(),
+  description: z.string().min(1,"Description is required").optional(),
+  location: z.string().min(1,"Location is required").optional(),
     foundDate: z.any().optional(),
     claim_process: z.string().min(1,"Claim proof is required"),
-    phone: z.string().optional().nullable(),
-    email: z.string().email().optional().or(z.literal('')),
+    phone: z.string().optional(),
     // img: z.string({required_error:"Found date is required"}).optional(),
-    file: z.any().optional().nullable(),
+    file: z.any().optional(),
+    status: z.string().optional(),
 });
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  foundItem: TfoundItemPartial
 };
 
-const AddFoundModal = ({ open, setOpen }: TProps) => {
+const EditFoundModal = ({ open, setOpen, foundItem }: TProps) => {
   const { data,  } = useGetCategoryQuery({});
-  const [createFoundItem,{isLoading}] = useCreateFoundItemMutation();
+  const [updateFoundItem,{isLoading}] = useUpdateFoundItemByIdMutation();
   const [isImgUploading,setImgUpload] = useState(false)
   
   const handleFormSubmit = async (values: FieldValues) => {
     console.log(values);
+    
     try {
       setImgUpload(true)
       // upload image
@@ -54,13 +58,13 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
       const {file,...payload} = values;
       payload.img = img || "";
       console.log(payload);
-        const res = await createFoundItem(payload).unwrap();
+        const res = await updateFoundItem({item_id:foundItem.id,data:payload}).unwrap();
       // console.log(res);
         if (res?.id) {
-          toast.success("Found item created successfully!!");
+          toast.success("Found item updated successfully!!");
           setOpen(false);
         }else{
-          toast.success("Failed to create item!!");
+          toast.success("Failed to update item!!");
         }
     } catch (err: any) {
       console.error(err.message);
@@ -70,20 +74,20 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
   };
 
   const defaultValues = {
-    categoryId: "",
-    foundItemName: "",
-    description: "",
-    location: "",
-    foundDate: dayjs(new Date()),
-    claim_process: "",
-    phone: "",
-    email: "",
-    img: "",
-    file: "",
+    ...foundItem,
+    foundDate: dayjs(new Date(foundItem?.foundDate || new Date())),
+    // categoryId: "",
+    // foundItemName: "",
+    // description: "",
+    // location: "",
+    // claim_process: "",
+    // phone: "",
+    // img: "",
+    // file: "",
   };
 
   return (
-    <LFModal open={open} setOpen={setOpen} title="Add a found item">
+    <LFModal open={open} setOpen={setOpen} title="Edit found item">
       <LFForm
         onSubmit={handleFormSubmit}
         resolver={zodResolver(addFoundItemValidationSchema)}
@@ -106,6 +110,15 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
               sx={{ mb: 2 }}
             />
             
+            <Grid item md={12}>
+              <LFSelectDropdown
+                items={ITEM_STATUSES}
+                name="status"
+                label="Status"
+                sx={{ mb: 2 }}
+              />
+            </Grid>
+
             <Grid item md={12}>
               <LFInput
                 name="description"
@@ -149,31 +162,23 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
               />
             </Grid>
             <Grid item md={12}>
-              <LFInput
-                name="email"
-                label="Email"
-                fullWidth={true}
-                sx={{ mb: 2 }}
-              />
-            </Grid>
-            <Grid item md={12}>
                 <LFFileUploader name="file" label="Upload File" />
             </Grid>
           </Grid>
         </Grid>
         {
-          // isLoading || isImgUploading ? <CircularProgress /> : <Button sx={{ mt: 1 }} type="submit">Add</Button>
+          // isLoading || isImgUploading ? <CircularProgress /> : <Button sx={{ mt: 1 }} type="submit">Edit</Button>
         }
         <Button 
           sx={{ mt: 1 }} 
-          type="submit"
-          startIcon={isLoading || isImgUploading ? <CircularProgress size={24} /> : <></>}
+          startIcon={isLoading || isImgUploading ? <CircularProgress size={24} /> : <></>}  
           disabled={isLoading || isImgUploading}
-        >Add</Button>
+          type="submit"
+        >Edit</Button>
         
       </LFForm>
     </LFModal>
   );
 };
 
-export default AddFoundModal;
+export default EditFoundModal;

@@ -8,12 +8,14 @@ import {
   Card,
   CardActions,
   CardContent,
+  Chip,
   Grid,
   Stack,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import AddClaimModal from "./components/AddClaimModal";
+import Link from "next/link";
 
 const ClaimPage = () => {
   const { data, isLoading } = useGetMYProfileQuery(undefined);
@@ -36,29 +38,31 @@ const ClaimPage = () => {
             <Grid item xs={12} md={6} lg={4} key={claim.id}>
               <Card variant="outlined">
                 <CardContent>
+                  <Stack direction={"row"} justifyContent={"space-between"} textAlign={"right"}>
+                    <Chip
+                      label={claim?.status}
+                      color={claim?.status === 'PENDING' ? 'primary' : claim?.status === 'APPROVED' ? 'success' : 'error'}
+                    />
+                  </Stack>
+                  <Title title={claim?.foundItem?.foundItemName} size="small" />
                   <Typography
-                    sx={{ fontSize: 14 }}
+                    sx={{ fontSize: 14, }}
                     color="text.secondary"
                     gutterBottom
                   >
-                    Claimed At {claim?.createdAt?.split("T")[0]}
+                    {claim?.distinguishingFeatures?.slice(0,200)}
                   </Typography>
-                  <Title title={claim?.foundItem?.foundItemName} size="small" />
+                  {/* <Typography variant="body2">
+                     {lost?.claim_process}
+                  </Typography> */}
                   <Typography variant="body2">
-                    Status {claim?.status}
-                  </Typography>
-                  <Typography variant="body2">
-                     {claim?.foundItem?.description}
-                  </Typography>
-                  <Typography variant="body2">
-                    Found By, {claim?.foundItem?.user?.name}
-                  </Typography>
-                  <Typography variant="body2">
-                    Contact, {claim?.foundItem?.user?.email}
+                    Found By, <span style={{fontStyle:"italic"}}>{claim?.foundItem?.user?.name}, Email: {claim?.foundItem?.user?.email}</span>
                   </Typography>
                 </CardContent>
                 {/* <CardActions>
-                  <Button size="small">Details</Button>
+                  <Link href={`/profile/claims/${claim.id}`}>
+                    <Button size="small" >Details</Button>
+                  </Link>
                 </CardActions> */}
               </Card>
             </Grid>

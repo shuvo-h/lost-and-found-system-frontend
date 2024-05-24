@@ -15,18 +15,19 @@ import { z } from "zod";
 import CircularProgress from '@mui/material/CircularProgress';
 import LFDatePicker from "@/components/Forms/LFDatePicker";
 import dayjs from "dayjs";
+import { useCreateLostItemMutation } from "@/redux/api/lostItemApi";
 
-const addFoundItemValidationSchema = z.object({
+const addLostItemValidationSchema = z.object({
   categoryId: z.string().min(1,"Category is required"),
-  foundItemName: z.string().min(1,"Item name is required"),
+  lostItemName: z.string().min(1,"Item name is required"),
   description: z.string().min(1,"Description is required"),
   location: z.string().min(1,"Location is required"),
-    foundDate: z.any().optional(),
-    claim_process: z.string().min(1,"Claim proof is required"),
-    phone: z.string().optional().nullable(),
+  lostDate: z.any().optional(),
+    // claim_process: z.string().min(1,"Claim proof is required"),
+    phone: z.string().optional().or(z.literal('')),
     email: z.string().email().optional().or(z.literal('')),
     // img: z.string({required_error:"Found date is required"}).optional(),
-    file: z.any().optional().nullable(),
+    file: z.any().optional(),
 });
 
 type TProps = {
@@ -34,13 +35,14 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AddFoundModal = ({ open, setOpen }: TProps) => {
+const AddLostItemModal = ({ open, setOpen }: TProps) => {
   const { data,  } = useGetCategoryQuery({});
-  const [createFoundItem,{isLoading}] = useCreateFoundItemMutation();
+  const [createLostItem,{isLoading}] = useCreateLostItemMutation();
   const [isImgUploading,setImgUpload] = useState(false)
   
   const handleFormSubmit = async (values: FieldValues) => {
     console.log(values);
+    
     try {
       setImgUpload(true)
       // upload image
@@ -48,16 +50,16 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
       if (values.file) {
         img = await uploadImageToImgBB(values.file)  
       }
-      if (values.foundDate) {
-        values.foundDate = new Date(values.foundDate).toISOString()
+      if (values.lostDate) {
+        values.lostDate = new Date(values.lostDate).toISOString()
       }
       const {file,...payload} = values;
       payload.img = img || "";
       console.log(payload);
-        const res = await createFoundItem(payload).unwrap();
+        const res = await createLostItem(payload).unwrap();
       // console.log(res);
         if (res?.id) {
-          toast.success("Found item created successfully!!");
+          toast.success("Lost item created successfully!!");
           setOpen(false);
         }else{
           toast.success("Failed to create item!!");
@@ -71,11 +73,10 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
 
   const defaultValues = {
     categoryId: "",
-    foundItemName: "",
+    lostItemName: "",
     description: "",
     location: "",
-    foundDate: dayjs(new Date()),
-    claim_process: "",
+    lostDate: dayjs(new Date()),
     phone: "",
     email: "",
     img: "",
@@ -83,17 +84,17 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
   };
 
   return (
-    <LFModal open={open} setOpen={setOpen} title="Add a found item">
+    <LFModal open={open} setOpen={setOpen} title="Add a lost item">
       <LFForm
         onSubmit={handleFormSubmit}
-        resolver={zodResolver(addFoundItemValidationSchema)}
+        resolver={zodResolver(addLostItemValidationSchema)}
         defaultValues={defaultValues}
       >
         <Grid container spacing={2}>
           <Grid item md={12}>
             <LFInput
-              name="foundItemName"
-              label="Found item name"
+              name="lostItemName"
+              label="Lost item name"
               fullWidth={true}
             />
           </Grid>
@@ -125,8 +126,8 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
             </Grid>
             <Grid item md={12}>
               <LFInput
-                name="claim_process"
-                label="Claim process"
+                name="email"
+                label="Email"
                 fullWidth={true}
                 sx={{ mb: 2 }}
               />
@@ -134,8 +135,8 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
 
             <Grid item md={12}>
               <LFDatePicker
-                name="foundDate"
-                label="Found Date"
+                name="lostDate"
+                label="Lost Date"
                 fullWidth={true}
                 sx={{ mb: 2 }}
               />
@@ -144,14 +145,6 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
               <LFInput
                 name="phone"
                 label="Phone"
-                fullWidth={true}
-                sx={{ mb: 2 }}
-              />
-            </Grid>
-            <Grid item md={12}>
-              <LFInput
-                name="email"
-                label="Email"
                 fullWidth={true}
                 sx={{ mb: 2 }}
               />
@@ -176,4 +169,4 @@ const AddFoundModal = ({ open, setOpen }: TProps) => {
   );
 };
 
-export default AddFoundModal;
+export default AddLostItemModal;
