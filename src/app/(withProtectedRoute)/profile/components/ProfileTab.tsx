@@ -4,45 +4,59 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const ProfileTab = () => {
   const pathname = usePathname();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number | null>(null);
+  console.log(pathname);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  
-  
 
   useEffect(() => {
-    // Set initial tab based on the pathname
     
     if (pathname) {
       if (pathname.startsWith("/profile/claims")) {
         setValue(0);
-      } else if (pathname.includes("/profile/losts")) {
+      } else if (pathname.startsWith("/profile/losts")) {
         setValue(1);
-      } else if (pathname.includes("/profile/founds")) {
+      } else if (pathname.startsWith("/profile/founds")) {
         setValue(2);
+      } else if (pathname.startsWith("/profile/edit/profile")) {
+        setValue(0); 
+      } else if (pathname.startsWith("/profile/edit/password")) {
+        setValue(1); 
       } else {
-        setValue(0); // Default to the first tab if no match
+        setValue(999); 
       }
     }
   }, [pathname]);
+
   
-  
+  const mainTabs = [
+    { label: "Claim Items", href: "/profile/claims" },
+    { label: "Lost Items", href: "/profile/losts" },
+    { label: "Found Items", href: "/profile/founds" }
+  ];
+
+  const editTabs = [
+    { label: "Profile", href: "/profile/edit/profile" },
+    { label: "Password", href: "/profile/edit/password" }
+  ];
+
+  const tabsToShow = pathname.startsWith("/profile/edit") ? editTabs : mainTabs;
+
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab  label={<Link style={{textDecoration:"none"}} href="/profile/claims">Claim Items</Link>} />
-        <Tab  label={<Link style={{textDecoration:"none"}} href="/profile/losts">Lost Items</Link>} />
-        <Tab  label={<Link style={{textDecoration:"none"}} href="/profile/founds">Found Items</Link>} />
-
-        {/* <Tab href="/profile/claims" label="Claim Items" />
-        <Tab href="/profile/losts" label="Lost Items" />
-        <Tab href="/profile/founds" label="Found Items" /> */}
+        {tabsToShow.map((tab, index) => (
+          <Tab
+            key={index}
+            label={<Link style={{ textDecoration: "none" }} href={tab.href}>{tab.label}</Link>}
+          />
+        ))}
       </Tabs>
     </Box>
   );

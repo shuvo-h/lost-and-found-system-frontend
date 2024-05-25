@@ -25,9 +25,11 @@ type TProps = {
 const LoginForm = ({ setIsRegForm }: TProps) => {
   const router = useRouter();
   const handleLogin = async (values: FieldValues) => {
+    console.log(values);
+    
     try {
       const res = await userLoginServerAction(values);
-      // console.log(res);
+      console.log(res);
       if (res.success) {
         toast.success(res.message);
         storeUserInfo({ accessToken: res.data?.accessToken });
@@ -46,8 +48,8 @@ const LoginForm = ({ setIsRegForm }: TProps) => {
   };
 
   const defaultValues = {
-    email_or_username: "",
-    password: "",
+    email_or_username: "arman",
+    password: "123456",
   };
 
   return (

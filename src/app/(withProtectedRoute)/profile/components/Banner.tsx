@@ -1,9 +1,12 @@
 'use client';
 import Title from '@/components/shared/Title';
 import { useGetMYProfileQuery } from '@/redux/api/myProfile';
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, IconButton, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import Link from 'next/link';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const Banner = () => {
     const { data, isLoading } = useGetMYProfileQuery(undefined);
@@ -33,8 +36,16 @@ const Banner = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={9}>
-                    <Title sx={{marginBottom:"0"}} title={`${data?.user?.name} ${data?.age ? "("+ data?.age + "y)":""}`} />
-                    <Typography sx={{fontSize:"14px"}}>{data?.user?.email}</Typography>
+                    <Box sx={{position:"relative"}}>
+                        <Title sx={{marginBottom:"0"}} title={`${data?.user?.name} ${data?.age ? "("+ data?.age + "y)":""}`} />
+                        <Typography sx={{fontSize:"14px"}}>{data?.user?.email}</Typography>
+                        <IconButton sx={{position:"absolute", top:0,right:30}} LinkComponent={Link} href='/profile/claims'>
+                            <ListAltIcon />
+                        </IconButton>
+                        <IconButton sx={{position:"absolute", top:0,right:0}} LinkComponent={Link} href='/profile/edit/password'>
+                            <ManageAccountsIcon />
+                        </IconButton>
+                    </Box>
                     <Typography sx={{marginTop:"12px"}}>{data?.bio?.slice(0,250)}</Typography>
                     <Grid container spacing={4}>
                         <Grid item md={4}>

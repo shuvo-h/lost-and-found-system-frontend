@@ -108,7 +108,7 @@ const AddClaimModal = ({ open, setOpen }: TProps) => {
         {
           // isLoading || isImgUploading ? <CircularProgress /> : <Button sx={{ mt: 1 }} type="submit">Add</Button>
         }
-        <Typography>{error?.message} test error</Typography>
+        
         <Button 
           sx={{ mt: 1 }} 
           type="submit"
