@@ -45,12 +45,14 @@ axiosInstance.interceptors.response.use(function (response) {
       setAccessToken(accessToken);
       return axiosInstance(config);
    } else {
+    // console.log(error.response.data);
       const responseObject: TResponseError = {
          statusCode: error?.response?.data?.statusCode || 500,
          message: error?.response?.data?.message || 'Something went wrong!!!',
-         errorDetails: error?.response?.data?.message,
+         errorDetails: error?.response?.data?.errorDetails,
       };
-      return responseObject;
+      // return responseObject;
+      return Promise.reject(responseObject);
    }
   });
 

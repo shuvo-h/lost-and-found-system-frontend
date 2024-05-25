@@ -31,13 +31,19 @@ export const axiosBaseQuery =
           "Content-Type": contentType || "application/json"
         },
       })
+      // console.log({result});
+      
       return result
-    } catch (axiosError) {
-      const err = axiosError as AxiosError
+    } catch (axiosError:any) {
+      // console.log(axiosError);
+      
+     
       return {
         error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
+          status: axiosError?.statusCode,
+          errorDetails: axiosError?.errorDetails,
+          message: axiosError?.message,
+          data: null,
         },
       }
     }

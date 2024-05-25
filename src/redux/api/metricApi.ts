@@ -3,19 +3,19 @@ import { tagTypes } from '../tag-types';
 import { baseApi } from './baseAPI';
 
 
-export const profileAPi = baseApi.injectEndpoints({
+export const metricApi = baseApi.injectEndpoints({
    endpoints: (build) => ({
-      getMYProfile: build.query({
+      getDashboardMetrics: build.query({
          query: () => {
             return {
-               url: '/my-profile',
+               url: '/metrics',
                method: 'GET',
             };
          },
-         providesTags: [tagTypes.me],
+        //  providesTags: [tagTypes.user],
       }),
 
    }),
 });
 
-export const { useGetMYProfileQuery, } = profileAPi;
+export const { useGetDashboardMetricsQuery, } = metricApi;

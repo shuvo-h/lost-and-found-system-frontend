@@ -1,11 +1,11 @@
 import React from 'react';
 
-const FoundPage = () => {
+const RecentPosts = () => {
     return (
         <div>
-            FoundPage
+            recent-posts
         </div>
     );
 };
 
-export default FoundPage;
+export default RecentPosts;
