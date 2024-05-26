@@ -51,7 +51,7 @@ const Footer = () => {
                       },
                     }}
                   >
-                    {item.icon} as
+                    {item.icon}
                   </Box>
                 </Link>
               ))}
