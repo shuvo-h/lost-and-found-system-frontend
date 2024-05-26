@@ -21,7 +21,7 @@ export const userApi = baseApi.injectEndpoints({
             // contentType: 'multipart/form-data',
             data:{status},
         }),
-        invalidatesTags: [tagTypes.user],
+        invalidatesTags: [tagTypes.user,tagTypes.metric],
     }),
 
    }),

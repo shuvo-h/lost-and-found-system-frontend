@@ -12,7 +12,7 @@ export const metricApi = baseApi.injectEndpoints({
                method: 'GET',
             };
          },
-        //  providesTags: [tagTypes.user],
+         providesTags: [tagTypes.metric],
       }),
 
    }),

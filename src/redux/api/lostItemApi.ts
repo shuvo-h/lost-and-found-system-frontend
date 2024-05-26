@@ -37,7 +37,7 @@ export const lostAPi = baseApi.injectEndpoints({
                 // contentType: 'multipart/form-data',
                 data,
             }),
-            invalidatesTags: [tagTypes.lost],
+            invalidatesTags: [tagTypes.lost,tagTypes.metric],
         }),
         
         updateLostItemById: build.mutation({
@@ -47,7 +47,7 @@ export const lostAPi = baseApi.injectEndpoints({
                 // contentType: 'multipart/form-data',
                 data,
             }),
-            invalidatesTags: [tagTypes.lost],
+            invalidatesTags: [tagTypes.lost,tagTypes.metric],
         }),
     
         
@@ -57,7 +57,7 @@ export const lostAPi = baseApi.injectEndpoints({
             method: 'DELETE',
             // contentType: 'multipart/form-data',
          }),
-         invalidatesTags: [tagTypes.lost],
+         invalidatesTags: [tagTypes.lost,tagTypes.metric],
       }),
       
 

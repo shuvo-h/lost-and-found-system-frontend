@@ -31,7 +31,7 @@ export const foundAPi = baseApi.injectEndpoints({
             // contentType: 'multipart/form-data',
             data,
          }),
-         invalidatesTags: [tagTypes.found],
+         invalidatesTags: [tagTypes.found,tagTypes.metric],
       }),
 
       updateFoundItemById: build.mutation({
@@ -41,7 +41,7 @@ export const foundAPi = baseApi.injectEndpoints({
             // contentType: 'multipart/form-data',
             data,
          }),
-         invalidatesTags: [tagTypes.found],
+         invalidatesTags: [tagTypes.found,tagTypes.metric],
       }),
       
       deleteFoundItemById: build.mutation({
@@ -50,7 +50,7 @@ export const foundAPi = baseApi.injectEndpoints({
             method: 'DELETE',
             // contentType: 'multipart/form-data',
          }),
-         invalidatesTags: [tagTypes.found],
+         invalidatesTags: [tagTypes.found,tagTypes.metric],
       }),
       
 

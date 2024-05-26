@@ -22,7 +22,7 @@ export const claimAPi = baseApi.injectEndpoints({
             // contentType: 'multipart/form-data',
             data,
          }),
-         invalidatesTags: [tagTypes.claim],
+         invalidatesTags: [tagTypes.claim,tagTypes.metric],
       }),
 
 
