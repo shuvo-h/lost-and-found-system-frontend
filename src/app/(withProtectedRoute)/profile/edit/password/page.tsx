@@ -59,13 +59,13 @@ const PasswordPage = () => {
 
   
   const defaultValues = {
-    old_password: "123456",
-    new_password: "123456",
-    confirm_new_password: "123456",
+    old_password: "",
+    new_password: "",
+    confirm_new_password: "",
   };
 
   return (
-    <Container>
+    <Container sx={{marginTop:5}}>
         <Paper sx={{maxWidth:400 , margin:"auto", padding:"12px", borderRadius:"12px"}} >
         <LFForm
             onSubmit={handleFormSubmit}

@@ -41,8 +41,18 @@ const Footer = () => {
             <Typography>Help by finding lost items</Typography>
             <Stack direction="row" spacing={2} justifyContent="center">
               {socialMediaLinks.map((item, index) => (
-                <Link style={{textDecoration:"none"}} key={index} href={item.url}>
-                  {item.icon}
+                <Link style={{textDecoration:"none"}} key={index} href={item.url} target="_blank"
+                rel="noopener noreferrer">
+                   <Box
+                    sx={{
+                      // color: theme.palette.primary.main, 
+                      '&:hover': {
+                        // color: theme.palette.primary.dark, 
+                      },
+                    }}
+                  >
+                    {item.icon} as
+                  </Box>
                 </Link>
               ))}
             </Stack>

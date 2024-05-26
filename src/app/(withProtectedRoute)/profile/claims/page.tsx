@@ -16,6 +16,7 @@ import {
 import React, { useState } from "react";
 import AddClaimModal from "./components/AddClaimModal";
 import Link from "next/link";
+import Loader from "@/components/shared/Loader";
 
 const ClaimPage = () => {
   const { data, isLoading } = useGetMYProfileQuery(undefined);
@@ -33,8 +34,9 @@ const ClaimPage = () => {
             <Button onClick={()=>setOpenModal(true)}>Add Claim</Button>
         </Stack>
       <Grid container spacing={2}>
-        {!isClaimLoading &&
-          claims?.map((claim:any) => (
+        { isClaimLoading || isLoading
+        ? <Grid item xs={12} ><Loader /> </Grid > 
+        : claims?.map((claim:any) => (
             <Grid item xs={12} md={6} lg={4} key={claim.id}>
               <Card variant="outlined">
                 <CardContent>

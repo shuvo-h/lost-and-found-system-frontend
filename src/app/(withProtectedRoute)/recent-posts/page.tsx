@@ -9,7 +9,8 @@ import FilterBar, { TFilters } from "./components/FilterBar";
 import useDebounce from "@/redux/debounce";
 import { removeNonValueProperties } from "@/utils/objectFormatter";
 import LostItems from "./components/lostItems";
-import { Box, Stack } from "@mui/material";
+import { Box, CircularProgress, Stack } from "@mui/material";
+import Loader from "@/components/shared/Loader";
 
 const RecentPosts = () => {
     const [tab,setTab] = useState(0);
@@ -37,8 +38,8 @@ const RecentPosts = () => {
         setTab(newValue);
       };
 
-    if (isLoading || isLoadingLost) {
-        return <>Loading...</>
+    if (isLoading || isLoadingLost ) {
+        return <Loader />
     }
 
     return (

@@ -1,5 +1,5 @@
 "use client"
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Box, Typography } from '@mui/material';
 import Title from '@/components/shared/Title';
 
@@ -26,26 +26,27 @@ const UserMetrics = ({totalActive=0,totalDeactive=0,count=0}:TProps) => {
                 User Metrics
             </Typography>
             <Typography variant="h6" gutterBottom>
-            Total  <span style={{fontSize:"3rem"}}>{count}</span> users using Lost and Found System
+            Total  <span>{count}</span> users using Lost and Found System
             </Typography>
-            
-            <PieChart width={300} height={300}>
-                <Pie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                >
-                    {pieData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-            </PieChart>
+            <ResponsiveContainer width="100%" height={300}>
+                <PieChart >
+                    <Pie
+                        data={pieData}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                    >
+                        {pieData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                </PieChart>
+            </ResponsiveContainer>
         </Box>
     );
 };

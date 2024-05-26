@@ -25,6 +25,7 @@ import { TfoundItemPartial } from "./components/fouondTypes";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useGetLostItemByIdQuery } from "@/redux/api/lostItemApi";
+import Loader from "@/components/shared/Loader";
 
 const FoundItemPage = () => {
   const { data, isLoading } = useGetMYProfileQuery(undefined);
@@ -35,7 +36,7 @@ const FoundItemPage = () => {
   const [deleteFoundItem,{isLoading:isDeleteLoading}] = useDeleteFoundItemByIdMutation();
 
   const {data:abData} = useGetLostItemByIdQuery({id:"2c7f754a-ac8b-482f-9051-ae3e9d807d00"})
-  console.log({abData});
+  // console.log({abData});
   
 
   const [openModal,setOpenModal] = useState(false);
@@ -63,8 +64,9 @@ const FoundItemPage = () => {
             <Button onClick={()=>setOpenModal(true)}>Add Found Item</Button>
         </Stack>
       <Grid container spacing={2}>
-        {!isFoundLoading &&
-          founds?.map((found:any) => (
+        {isFoundLoading || isLoading
+        ? <Grid item xs={12} ><Loader /> </Grid > 
+        : founds?.map((found:any) => (
             <Grid item xs={12} md={6} lg={4} key={found.id}>
               <Card variant="outlined">
                 <CardContent>

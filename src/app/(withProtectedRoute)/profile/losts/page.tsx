@@ -29,6 +29,7 @@ import { useDeleteLostItemByIdMutation, useGetLostItemsQuery } from "@/redux/api
 import { TLostItemPartial } from "./components/lostTypes";
 import AddLostItemModal from "./components/AddLostModal";
 import EditLostModal from "./components/EditLostModal";
+import Loader from "@/components/shared/Loader";
 
 const LostItemPage = () => {
   const { data, isLoading } = useGetMYProfileQuery(undefined);
@@ -63,8 +64,9 @@ const LostItemPage = () => {
             <Button onClick={()=>setOpenModal(true)}>Add Lost Item</Button>
         </Stack>
       <Grid container spacing={2}>
-        {!isLostLoading &&
-          losts?.map((lost:any) => (
+        {isLostLoading || isLoading
+        ? <Grid item xs={12} ><Loader /> </Grid >
+        :  losts?.map((lost:any) => (
             <Grid item xs={12} md={6} lg={4} key={lost.id}>
               <Card variant="outlined">
                 <CardContent>

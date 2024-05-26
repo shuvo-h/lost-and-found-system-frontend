@@ -6,13 +6,14 @@ import FoundByCatagory from "./compoents/FoundByCatagory";
 import { Box, Grid } from "@mui/material";
 import StatusLineChart from "./compoents/StatusLineChart";
 import LostByCatagory from "./compoents/LostByCatagory";
+import Loader from "@/components/shared/Loader";
 
 const DashboardPage = () => {
   const { data, isLoading } = useGetDashboardMetricsQuery(undefined);
   console.log(data);
 
   if (isLoading) {
-    return <p>Loading.....</p>;
+    return <Loader />;
   }
   const statusData = [
     {

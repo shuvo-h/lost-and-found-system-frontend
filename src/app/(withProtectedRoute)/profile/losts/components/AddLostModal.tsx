@@ -91,7 +91,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
         defaultValues={defaultValues}
       >
         <Grid container spacing={2}>
-          <Grid item md={12}>
+          <Grid item xs={12} md={12}>
             <LFInput
               name="lostItemName"
               label="Lost item name"
@@ -99,7 +99,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
 
-          <Grid item md={12}>
+          <Grid item xs={12} md={12}>
             <LFSelectDropdown
               items={data || []}
               name="categoryId"
@@ -107,7 +107,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
               sx={{ mb: 2 }}
             />
             
-            <Grid item md={12}>
+            <Grid item xs={12} md={12}>
               <LFInput
                 name="description"
                 label="Description"
@@ -116,7 +116,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
               />
             </Grid>
             
-            <Grid item md={12}>
+            <Grid item xs={12} md={12}>
               <LFInput
                 name="location"
                 label="Location"
@@ -124,7 +124,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
                 sx={{ mb: 2 }}
               />
             </Grid>
-            <Grid item md={12}>
+            <Grid item xs={12} md={12}>
               <LFInput
                 name="email"
                 label="Email"
@@ -133,7 +133,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
               />
             </Grid>
 
-            <Grid item md={12}>
+            <Grid item xs={12} md={12}>
               <LFDatePicker
                 name="lostDate"
                 label="Lost Date"
@@ -141,7 +141,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
                 sx={{ mb: 2 }}
               />
             </Grid>
-            <Grid item md={12}>
+            <Grid item xs={12} md={12}>
               <LFInput
                 name="phone"
                 label="Phone"
@@ -149,7 +149,7 @@ const AddLostItemModal = ({ open, setOpen }: TProps) => {
                 sx={{ mb: 2 }}
               />
             </Grid>
-            <Grid item md={12}>
+            <Grid item xs={12} md={12}>
                 <LFFileUploader name="file" label="Upload File" />
             </Grid>
           </Grid>

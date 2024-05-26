@@ -24,6 +24,7 @@ import {
 import { getFromLocalStorage } from "@/utils/localStorage";
 import { AUTH_KEY } from "@/constant/authKey";
 import { useGetMYProfileQuery } from "@/redux/api/myProfile";
+import Loader from "@/components/shared/Loader";
 
 const profileValidationSchema = z.object({
   name: z
@@ -110,16 +111,16 @@ const EditProfileInfoPage = () => {
     name: userData?.user?.name||"",
     profile: {
       bio: userData?.bio||"",
-      age: userData?.age||"",
+      age: userData?.age?.toString()||"",
     },
   };
 
   if (isProfileLoading) {
-    return <>Loading...</>
+    return <Loader />
   }
 
   return (
-    <Container>
+    <Container sx={{marginTop:5}}>
       <Paper
         sx={{
           maxWidth: 400,

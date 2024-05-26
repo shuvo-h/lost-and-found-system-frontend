@@ -1,23 +1,16 @@
 "use client";
 import logo from "@/app/logo.png";
-import AdbIcon from "@mui/icons-material/Adb";
-import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
-  Avatar,
   Box,
   Button,
   Container,
-  Menu,
-  MenuItem,
   Tooltip,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Link from "next/link";
-import LoginRegModl from "./LoginRegModal";
 import { navItems, navProtectedItems } from "./navList";
 import MobileMenu from "./MobileMenu";
 import NavItem from "./NavItem";
@@ -25,6 +18,7 @@ import { isLoggedIn, removeUser } from "@/services/actions/auth.service";
 import profileImg from "@/assets/home/profile/profile.jpg";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 function AppNavBar() {
   const router = useRouter();
@@ -38,6 +32,7 @@ function AppNavBar() {
     removeUser();
     setIslogin(false)
     // router.refresh(); // without reload, refresh the page
+    toast.message("user logout successful");
     router.push("/login")
   };
   const navAllItems = isLogin ? [...navItems,...navProtectedItems]: navItems 
@@ -96,7 +91,6 @@ function AppNavBar() {
             Logout
           </Button>
           }
-          {/* <LoginRegModl /> */}
         </Toolbar>
       </Container>
     </AppBar>

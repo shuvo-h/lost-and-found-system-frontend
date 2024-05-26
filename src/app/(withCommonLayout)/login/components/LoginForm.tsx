@@ -34,7 +34,7 @@ const LoginForm = () => {
         storeUserInfo({ accessToken: res.data?.accessToken });
         // router.push("/dashboard")
       }
-      toast.error(res.message);
+      toast.message(res.message);
     } catch (error: any) {
       console.log(error.message);
       toast.error(error.message,{style:{background:"red"}});

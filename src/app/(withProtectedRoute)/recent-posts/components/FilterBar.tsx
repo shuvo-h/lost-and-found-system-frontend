@@ -33,14 +33,14 @@ const FilterBar = ({ filters,setFilters  }:FilterBar) => {
 
   return (
     <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
-      <FormControl sx={{ minWidth: 120 }}>
+      <FormControl sx={{ minWidth: 120 }} size='small'>
         <InputLabel>Category</InputLabel>
         <Select
           value={filters.categoryId}
           name="categoryId"
           onChange={ handleChange}
           label="Category"
-          size='small'
+          
         >
           <MenuItem value=""><em>None</em></MenuItem>
           {categories?.map((category:{id:string,name:string}) => (

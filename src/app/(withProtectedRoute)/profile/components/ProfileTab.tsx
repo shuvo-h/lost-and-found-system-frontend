@@ -52,10 +52,18 @@ const ProfileTab = () => {
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Tabs value={value} onChange={handleChange} centered>
         {tabsToShow.map((tab, index) => (
-          <Tab
-            key={index}
-            label={<Link style={{ textDecoration: "none" }} href={tab.href}>{tab.label}</Link>}
-          />
+          // <Tab
+          //   key={index}
+          //   sx={{ padding: "8px" }}
+          //   label={<Link style={{ textDecoration: "none" }} href={tab.href}>{tab.label}</Link>}
+          // />
+          <Link style={{ textDecoration: "none" }} href={tab.href} key={index}>
+            <Tab
+              key={index}
+              sx={{ padding: "8px" }}
+              label={tab.label}
+            />
+          </Link>
         ))}
       </Tabs>
     </Box>

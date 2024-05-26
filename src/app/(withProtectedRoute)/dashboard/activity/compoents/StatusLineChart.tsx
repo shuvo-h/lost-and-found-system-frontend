@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 type TProps = {
@@ -29,31 +30,33 @@ const StatusLineChart = ({ data }: TProps) => {
       <Typography variant="h6" gutterBottom>
         Status on different types of items
       </Typography>
-      <LineChart width={600} height={300} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="pending"
-          name="Pending"
-          stroke="#8884d8"
-        />
-        <Line
-          type="monotone"
-          dataKey="approved"
-          name="Approved"
-          stroke="#82ca9d"
-        />
-        <Line
-          type="monotone"
-          dataKey="rejected"
-          name="Rejected"
-          stroke="#ffc658"
-        />
-      </LineChart>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart  data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="pending"
+            name="Pending"
+            stroke="#8884d8"
+          />
+          <Line
+            type="monotone"
+            dataKey="approved"
+            name="Approved"
+            stroke="#82ca9d"
+          />
+          <Line
+            type="monotone"
+            dataKey="rejected"
+            name="Rejected"
+            stroke="#ffc658"
+          />
+        </LineChart>
+      </ResponsiveContainer>
     </Box>
   );
 };

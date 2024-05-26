@@ -7,6 +7,7 @@ import React from 'react';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import Link from 'next/link';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import profileImg from "@/assets/home/profile/profile.jpg"
 
 const Banner = () => {
     const { data, isLoading } = useGetMYProfileQuery(undefined);
@@ -31,7 +32,7 @@ const Banner = () => {
                                 height:"120px",
                             }}
                         >
-                            <Image style={{width:"100%"}} src={"https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"} width={200} height={200} alt='' />
+                            <Image style={{width:"100%"}} src={profileImg} width={100} height={120} alt='' />
                         </Box>
                     </Box>
                 </Grid>
@@ -48,13 +49,13 @@ const Banner = () => {
                     </Box>
                     <Typography sx={{marginTop:"12px"}}>{data?.bio?.slice(0,250)}</Typography>
                     <Grid container spacing={4}>
-                        <Grid item md={4}>
+                        <Grid item xs={4}>
                             <Title sx={{display:"inline"}} title={`${data?.count?.claim ||0}`} variant='h2' /> Claims
                         </Grid>
-                        <Grid item md={4}>
+                        <Grid item xs={4}>
                             <Title sx={{display:"inline"}} title={`${data?.count?.lost ||0}`} variant='h2' /> Lost
                         </Grid>
-                        <Grid item md={4}>
+                        <Grid item xs={4}>
                             <Title sx={{display:"inline"}} title={`${data?.count?.found ||0}`} variant='h2' /> Founds
                         </Grid>
                     </Grid>

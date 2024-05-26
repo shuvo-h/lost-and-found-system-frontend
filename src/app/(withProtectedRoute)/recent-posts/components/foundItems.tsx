@@ -1,5 +1,7 @@
 "use client"
 import { Card, CardContent, CardMedia, Grid, Typography, Box } from '@mui/material';
+import placehoderImg from "@/assets/home/placeholder.png"
+import Image from 'next/image';
 // types.ts
 interface Category {
     id: string;
@@ -38,17 +40,18 @@ interface Category {
 const FoundItemCard = ({ item }:{item:TItem}) => {
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <CardMedia
+      {/* <CardMedia
         sx={{ height: 140 }}
-        image={item.img || 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'}
+        image={item.img || placehoderImg}
         title={item.foundItemName}
-      />
+      /> */}
+      <Image src={item.img || placehoderImg} width={362} height={200} alt='' />
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h5" component="div">
           {item.foundItemName}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {item.description}
+          {item.description?.slice(0,250)}...
         </Typography>
         <Typography variant="body2" color="text.secondary">
           <strong>Location:</strong> {item.location}
