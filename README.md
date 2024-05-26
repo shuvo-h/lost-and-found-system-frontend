@@ -1,4 +1,5 @@
-# Lost and Found System
+# Lost and Found System 🔍
+[![Lost and Found System Logo](https://lostfoundway.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.bbb81a69.png&w=96&q=75)](https://lostfoundway.vercel.app)
 
 This project is a comprehensive Lost and Found System designed to streamline the process of reporting lost or found items, facilitating their recovery, and providing a platform for communication between users. Users can report lost or found items, search for items based on various criteria, and communicate with other users for item recovery.
 It has a dashboard for controlling user and a profile page to keep track the user's own items
