@@ -6,6 +6,8 @@ export enum tagTypes {
     lost = 'lost',
     me = 'me',
     metric = 'metric',
+    single_found = 'single_found',
+    single_lost = 'single_lost',
 }
  
  export const tagTypesList = [
@@ -16,4 +18,6 @@ export enum tagTypes {
     tagTypes.lost,
     tagTypes.me,
     tagTypes.metric,
+    tagTypes.single_found,
+    tagTypes.single_lost,
 ];

@@ -5,12 +5,13 @@ import Image from 'next/image';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
 import { useGetLostItemByIdQuery } from '@/redux/api/lostItemApi';
+import Loader from '@/components/shared/Loader';
 
 const LostItemDetails = ({ params }: { params: { lost_id: string } }) => {
     const { data } = useGetLostItemByIdQuery({id:params.lost_id });
     
     if (!data) {
-        return <div>Loading...</div>;
+        return <Loader />;
     }
 
     const { lostItemName, description, location, lostDate,category, user, email, phone, status, img } = data;

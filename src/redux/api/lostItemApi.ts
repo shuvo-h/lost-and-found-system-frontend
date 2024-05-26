@@ -16,17 +16,18 @@ export const lostAPi = baseApi.injectEndpoints({
          providesTags: [tagTypes.lost],
       }),
       getLostItemById: build.query({
-            query: (arg: Record<string, any>) => {
+         query: (arg: Record<string, any>) => {
                 return {
                 url: '/lost-items',
                 method: 'GET',
                 params: arg,
                 };
             },
+            providesTags: [tagTypes.single_lost],
             transformResponse: (response: any,) => {
-                return {
+               return {
                    ...response?.length ? response[0]:{} ,
-                };
+                  };
              },
         }),
         
@@ -37,7 +38,7 @@ export const lostAPi = baseApi.injectEndpoints({
                 // contentType: 'multipart/form-data',
                 data,
             }),
-            invalidatesTags: [tagTypes.lost,tagTypes.metric],
+            invalidatesTags: [tagTypes.lost,tagTypes.metric,tagTypes.me],
         }),
         
         updateLostItemById: build.mutation({
@@ -47,7 +48,7 @@ export const lostAPi = baseApi.injectEndpoints({
                 // contentType: 'multipart/form-data',
                 data,
             }),
-            invalidatesTags: [tagTypes.lost,tagTypes.metric],
+            invalidatesTags: [tagTypes.lost,tagTypes.metric,tagTypes.me,tagTypes.single_lost],
         }),
     
         
@@ -57,7 +58,7 @@ export const lostAPi = baseApi.injectEndpoints({
             method: 'DELETE',
             // contentType: 'multipart/form-data',
          }),
-         invalidatesTags: [tagTypes.lost,tagTypes.metric],
+         invalidatesTags: [tagTypes.lost,tagTypes.metric,tagTypes.me],
       }),
       
 

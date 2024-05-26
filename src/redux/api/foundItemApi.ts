@@ -22,6 +22,7 @@ export const foundAPi = baseApi.injectEndpoints({
                method: 'GET',
             };
          },
+         providesTags: [tagTypes.single_found],
       }),
       
       createFoundItem: build.mutation({
@@ -31,7 +32,7 @@ export const foundAPi = baseApi.injectEndpoints({
             // contentType: 'multipart/form-data',
             data,
          }),
-         invalidatesTags: [tagTypes.found,tagTypes.metric],
+         invalidatesTags: [tagTypes.found,tagTypes.metric,tagTypes.me],
       }),
 
       updateFoundItemById: build.mutation({
@@ -41,7 +42,7 @@ export const foundAPi = baseApi.injectEndpoints({
             // contentType: 'multipart/form-data',
             data,
          }),
-         invalidatesTags: [tagTypes.found,tagTypes.metric],
+         invalidatesTags: [tagTypes.found,tagTypes.metric,tagTypes.me,tagTypes.single_found],
       }),
       
       deleteFoundItemById: build.mutation({
@@ -50,7 +51,7 @@ export const foundAPi = baseApi.injectEndpoints({
             method: 'DELETE',
             // contentType: 'multipart/form-data',
          }),
-         invalidatesTags: [tagTypes.found,tagTypes.metric],
+         invalidatesTags: [tagTypes.found,tagTypes.metric,tagTypes.me],
       }),
       
 

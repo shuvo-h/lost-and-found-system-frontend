@@ -37,7 +37,6 @@ const DashboardPage = () => {
   ]
   return (
     <Box>
-      DashboardPage
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <StatusLineChart

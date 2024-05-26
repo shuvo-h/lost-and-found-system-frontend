@@ -3,6 +3,7 @@ import AppNavBar from '@/components/shared/appbar/AppBar';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { isLoggedIn } from '@/services/actions/auth.service';
+import Loader from '@/components/shared/Loader';
 
 type TProps = {
     children: React.ReactNode
@@ -22,7 +23,7 @@ const ProtectedLayout = ({children}:TProps) => {
     }, [router]);
 
     if (loading) {
-        return null; // Or a loading spinner, skeleton, etc.
+        return <Loader />; // Or a loading spinner, skeleton, etc.
     }
     return (
         <>

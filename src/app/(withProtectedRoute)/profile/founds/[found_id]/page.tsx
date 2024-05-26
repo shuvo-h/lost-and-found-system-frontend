@@ -4,12 +4,13 @@ import { Container, Typography, Grid, Paper, TableContainer, Table, TableHead, T
 import Image from 'next/image';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
+import Loader from '@/components/shared/Loader';
 
 const FoundItemDetails = ({ params }: { params: { found_id: string } }) => {
     const { data } = useGetFoundItemByIdQuery(params.found_id);
     
     if (!data) {
-        return <div>Loading...</div>;
+        return <Loader />;
     }
 
     const { foundItemName, description, location, foundDate, claims, user, email, phone, status, claim_process, img } = data;

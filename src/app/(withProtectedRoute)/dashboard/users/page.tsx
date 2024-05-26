@@ -2,16 +2,16 @@
 import { useGetAllUsersQuery } from '@/redux/api/userApi';
 import React from 'react';
 import UserTable from './components/UserTable';
+import Loader from '@/components/shared/Loader';
 
 const Users = () => {
     const {data: users, isLoading} = useGetAllUsersQuery(undefined)
    
     if(isLoading){
-        return <>loading...</>
+        return <Loader />
     }
     return (
         <div>
-            Users
             <UserTable userList={users || []} /> 
         </div>
     );
