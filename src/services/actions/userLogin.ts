@@ -18,7 +18,7 @@ export const userLoginServerAction = async(payload:FieldValues)=>{
     
     if (result.data?.accessToken) {
         setAccessToken(result.data.accessToken, {
-           redirect: '/dashboard2',
+           redirect: '/dashboard/activity',
         });
      }
 

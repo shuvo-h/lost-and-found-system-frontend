@@ -1,6 +1,7 @@
 import { Box, Button, Container, Grid, Stack, Typography } from '@mui/material';
 import bannerImg from "@/assets/home/hero_section/banner1.jpg"
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 const HeroSection = () => {
@@ -16,13 +17,16 @@ const HeroSection = () => {
                             Found or lost something valuable? Post here to help return it.
                         </Typography>
                         <Stack direction={"row"} spacing={2}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                size="large"
-                            >
-                                Post a Found Item
-                            </Button>
+                            <Link href={"/profile/founds"} passHref={true}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    size="large"
+                                >
+                                    Post a Found Item
+                                </Button>
+                            </Link>
+                            <Link href={"/profile/claims"} passHref={true}>
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -30,6 +34,7 @@ const HeroSection = () => {
                             >
                                 Claim a Item
                             </Button>
+                            </Link>
 
                         </Stack>
                     </Box>

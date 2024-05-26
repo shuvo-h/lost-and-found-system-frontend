@@ -8,7 +8,7 @@ export const storeUserInfo = ({accessToken}:{accessToken:string}) =>{
 }
 export const getUserInfo = () =>{
     const accessToken = getFromLocalStorage(AUTH_KEY);
-    console.log({accessToken});
+    // console.log({accessToken});
     if (accessToken) {
         const decodedUser:any = decodeToken(accessToken);
         return {
@@ -19,7 +19,7 @@ export const getUserInfo = () =>{
 }
 export const isLoggedIn = () =>{
     const accessToken = getFromLocalStorage(AUTH_KEY);
-    console.log({accessToken});
+    // console.log({accessToken});
     if (accessToken) {
         return !!accessToken
     }

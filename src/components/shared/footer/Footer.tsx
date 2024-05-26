@@ -52,7 +52,7 @@ const Footer = () => {
         </Grid>
         {footerSections.map((section, index) => (
           <Grid key={index} xs={12} md={6} lg={4} item>
-            <Box>
+            <Box sx={{marginTop:{sm:5, xs:5}, textAlign:"center"}} >
               <Typography variant="h6">{section.title}</Typography>
               <Stack direction="column" spacing={1}>
                 {section.links.map((link, idx) => (

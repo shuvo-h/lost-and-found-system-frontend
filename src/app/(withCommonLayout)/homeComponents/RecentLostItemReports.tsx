@@ -2,6 +2,7 @@ import Title from '@/components/shared/Title';
 import { TLostItem } from '@/types/item';
 import { Grid, Typography, Link, Card, CardContent, CardMedia, CardActions, Button, Box } from '@mui/material';
 import Image from 'next/image';
+import placeholderImg from "@/assets/home/placeholder.png"
 
 const RecentLostItemReports = async () => {
   console.log(process.env.NEXT_PUBLIC_BACKEND_API_URL);
@@ -14,19 +15,19 @@ const RecentLostItemReports = async () => {
     
     
     return (
-        <Grid container spacing={2} mt={8}>
+        <Grid container spacing={2} mt={8} sx={{margin:"auto"}}>
             <Grid item xs={12}>
                 <Title  title='Recent Lost Item Reports' size='medium' />
             </Grid >
             <Grid container spacing={3}>
                 {
                     !!res.data?.length && res.data?.slice(0,6)?.map((item:TLostItem) => (
-                        <Grid item xs={12} md={6} lg={4} key={item.id}>
-                            <Card sx={{ maxWidth: 345 }}>
+                        <Grid item xs={12} sm={6} lg={4} key={item.id}>
+                            <Card sx={{ maxWidth: 345, margin:"auto" , height:"100%", display:"flex", flexDirection:"column"}}>
                                 <Box textAlign={"center"} sx={{width:"100%",height:"200px"}} >
                                         <Image 
                                         style={{width:"100%"}}
-                                        src={item.img || "https://react.semantic-ui.com/images/image-16by9.png"} 
+                                        src={item.img || placeholderImg} 
                                         width={200} 
                                         height={200} alt='' 
                                         />
@@ -44,7 +45,7 @@ const RecentLostItemReports = async () => {
                                         Location: {item.location}
                                     </Typography>
                                 </CardContent>
-                                <CardActions>
+                                <CardActions sx={{flexGrow:1, alignItems:"end"}} >
                                     <Button size="small">Details</Button>
                                 </CardActions>
                             </Card>

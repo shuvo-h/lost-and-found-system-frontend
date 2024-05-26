@@ -33,7 +33,7 @@ const LFInput = ({
                 return (
                     <TextField
                         {...field}
-                        // value={field.value ?? ''} // Ensure value is never null
+                        value={field.value ?? ''} // Ensure value is never null
                         sx={{ ...sx }}
                         label={label}
                         type={type}

@@ -3,32 +3,26 @@
 import {
   Avatar,
   Box,
-  Button,
   IconButton,
   Menu,
   MenuItem,
   Tooltip,
-  Typography,
 } from "@mui/material";
 
 import React, { useState } from "react";
 
-import LoginForm from "./LoginForm";
+import LoginForm from "../../../app/(withCommonLayout)/login/components/LoginForm";
 import RegistrationForm from "./RegForm";
 
-
 const LoginRegModal = () => {
-  const [isRegForm,setIsRegForm] = useState(true)
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(
-    null
-  );
+  const [isRegForm, setIsRegForm] = useState(true);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  
 
   return (
     <Box sx={{ flexGrow: 0 }}>
@@ -54,12 +48,11 @@ const LoginRegModal = () => {
         onClose={handleCloseUserMenu}
       >
         <MenuItem>
-          {
-            isRegForm 
-            ? <RegistrationForm setIsRegForm={setIsRegForm} />
-            : <LoginForm setIsRegForm={setIsRegForm} />
-          }
-          
+          {isRegForm ? (
+            <RegistrationForm setIsRegForm={setIsRegForm} />
+          ) : (
+            <LoginForm setIsRegForm={setIsRegForm} />
+          )}
         </MenuItem>
       </Menu>
     </Box>
